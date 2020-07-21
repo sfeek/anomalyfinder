@@ -1,0 +1,8 @@
+C:\SourceCode\AnomalieFinder\AnomalieFinder\bin\Debug\AnomalieFinder.exe.config
+C:\SourceCode\AnomalieFinder\AnomalieFinder\bin\Debug\AnomalieFinder.exe
+C:\SourceCode\AnomalieFinder\AnomalieFinder\bin\Debug\AnomalieFinder.pdb
+C:\SourceCode\AnomalieFinder\AnomalieFinder\obj\Debug\AnomalieFinder.AF.resources
+C:\SourceCode\AnomalieFinder\AnomalieFinder\obj\Debug\AnomalieFinder.Properties.Resources.resources
+C:\SourceCode\AnomalieFinder\AnomalieFinder\obj\Debug\AnomalyFinder.csproj.GenerateResource.cache
+C:\SourceCode\AnomalieFinder\AnomalieFinder\obj\Debug\AnomalieFinder.exe
+C:\SourceCode\AnomalieFinder\AnomalieFinder\obj\Debug\AnomalieFinder.pdb
