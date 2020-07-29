@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AnomalieFinder
@@ -79,20 +72,16 @@ namespace AnomalieFinder
         {
             double[] output = new double[size];
             double[] slice = new double[w];
-            int o, j, s;
-            double avg, sd;
+            int s;
 
-            o = 0;
+
             for(int i=w; i<size; i++)
             {
                 output[i] = 0;
-                j = i - w;
                 s = 0;
-                for (int x = j; x < i; x++)
+                for (int x = i - w; x < i; x++)
                     slice[s++] = buffer[x];
-                avg = Avg(slice, w);
-                sd = SDPop(slice, w);
-                output[i] = (buffer[i] - avg) / sd;
+                output[i] = (buffer[i] - Avg(slice, w)) / SDPop(slice, w);
             }
 
             return output;
@@ -215,6 +204,12 @@ namespace AnomalieFinder
             }
 
             if (!results) txtResults.AppendText("No Anomalies Found");
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtInput.Text = String.Empty;
+            txtResults.Text = String.Empty;
         }
     }
 }
