@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AnomalieFinder
@@ -71,17 +73,26 @@ namespace AnomalieFinder
         private double[] ZMoving(double[] buffer, int size, int w)
         {
             double[] output = new double[size];
-            double[] slice = new double[w];
+            double[] islice = new double[w];
+            double[] oslice;
             int s;
 
-
-            for(int i=w; i<size; i++)
+            for (s = 0; s < size - w; s++)
             {
-                output[i] = 0;
-                s = 0;
-                for (int x = i - w; x < i; x++)
-                    slice[s++] = buffer[x];
-                output[i] = (buffer[i] - Avg(slice, w)) / SDPop(slice, w);
+                // Get a slice
+                for (int i = s; i < s + w; i++)
+                {
+                    islice[i - s] = buffer[i];
+                }
+
+                // Calculate Z Scores for the slice
+                oslice = ZRobust(islice, w);
+
+                // Keep only largest in the output
+                for (int i = s; i < s + w; i++)
+                {
+                    if (Math.Abs(oslice[i-s]) > Math.Abs(output[i]))  output[i] = oslice[i-s];
+                }
             }
 
             return output;
@@ -115,7 +126,7 @@ namespace AnomalieFinder
         // Search for anomalys
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            double pd;
+            int pd;
             int zsize;
             bool results = false;
             double[] zvalues;
@@ -125,17 +136,17 @@ namespace AnomalieFinder
 
             try
             {
-                pd = Convert.ToDouble(txtSensitivity.Text);
+                pd = Convert.ToInt32(txtSensitivity.Text);
             }
             catch
             {
-                txtResults.AppendText("Z Threshold Error!");
+                txtResults.AppendText("Top # Error");
                 return;
             }
 
-            if (pd < 0.0)
+            if (pd < 1)
             {
-                txtResults.AppendText("Z Threshold Error!");
+                txtResults.AppendText("Top # Error");
                 return;
             }
 
@@ -148,59 +159,90 @@ namespace AnomalieFinder
                 return;
             }
 
-            if (values.Length < 5)
+            try
+            {
+                zsize = Convert.ToInt32(txtWindowSize.Text);
+            }
+            catch
+            {
+                txtResults.AppendText("Moving Z Size Error!");
+                return;
+            }
+
+            if (values.Length < zsize)
             {
                 txtResults.AppendText("Too Few Entries Error!");
                 return;
             }
 
-            if (chkMovingZ.Checked == true)
+            if (zsize < 3)
             {
-                try
-                {
-                    zsize = Convert.ToInt32(txtWindowSize.Text);
-                }
-                catch
-                {
-                    txtResults.AppendText("Moving Z Size Error!");
-                    return;
-                }
-
-                if (zsize < 3 || zsize > (values.Length / 3))
-                {
-                    txtResults.AppendText("Moving Z Size Error!");
-                    return;
-                }
-
-                stype = "  rise";
-                dtype = "  fall";
-
-                zvalues = ZMoving(values, values.Length, zsize);
-            }
-            else
-            {
-                stype = "  spike";
-                dtype = "  dip";
-
-                zvalues = ZRobust(values, values.Length);
+                txtResults.AppendText("Moving Z Size Error!");
+                return;
             }
 
-            for (int i = 0; i < zvalues.Length; i++)
+            stype = "  spike";
+            dtype = "  dip";
+
+            zvalues = ZMoving(values, values.Length, zsize);
+
+            var zdictionary = new Dictionary<int, double>();
+
+            for (int i = 1; i < zvalues.Length; i++) zdictionary.Add(i,zvalues[i - 1]);
+
+            var zitems = from pair in zdictionary
+                    orderby pair.Value descending
+                    select pair;
+
+            // Show "Spikes"
+            int c = 0;
+            foreach (KeyValuePair<int, double> pair in zitems)
             {
-                double zv = zvalues[i];
+                if (c == pd) break;
+                double zv = zdictionary[pair.Key];
 
                 z = ")  Z = ";
                 if (zv < -100.0) { zv = -100.0; z = ")  Z < "; }
                 if (zv > 100.0) { zv = 100.0; z = ")  Z > "; }
 
-                if (Math.Abs(zv) >= pd)
+                if (Math.Abs(zv) < 100.0)
                 {
                     results = true;
+                    
                     if (zv > 0)
-                        txtResults.AppendText("#" + (i + 1).ToString() + " (" + String.Format("{0:.###}", values[i]) + z + String.Format("{0:.0}", zv) + stype + Environment.NewLine);
+                        txtResults.AppendText("#" + (pair.Key).ToString() + " (" + String.Format("{0:.###}", values[pair.Key - 1]) + z + String.Format("{0:.0}", zv) + stype + Environment.NewLine);
                     else
-                        txtResults.AppendText("#" + (i + 1).ToString() + " (" + String.Format("{0:.###}", values[i]) + z + String.Format("{0:.0}", zv) + dtype + Environment.NewLine);
+                        txtResults.AppendText("#" + (pair.Key).ToString() + " (" + String.Format("{0:.###}", values[pair.Key - 1]) + z + String.Format("{0:.0}", zv) + dtype + Environment.NewLine);
+                    //txtResults.AppendText(String.Format("{0:.0}", zv) + Environment.NewLine);
                 }
+                c++;
+            }
+
+            txtResults.AppendText(Environment.NewLine);
+
+            // Show "Dips"
+            c = 0;
+            foreach (KeyValuePair<int, double> pair in zitems.Reverse())
+            {
+                if (c == pd) break;
+                double zv = zdictionary[pair.Key];
+
+                z = ")  Z = ";
+                if (zv < -100.0) { zv = -100.0; z = ")  Z < "; }
+                if (zv > 100.0) { zv = 100.0; z = ")  Z > "; }
+
+                if (Math.Abs(zv) < 100.0)
+                {
+                    results = true;
+
+                    if (zv > 0)
+                        txtResults.AppendText("#" + (pair.Key).ToString() + " (" + String.Format("{0:.###}", values[pair.Key - 1]) + z + String.Format("{0:.0}", zv) + stype + Environment.NewLine);
+                    else
+                        txtResults.AppendText("#" + (pair.Key).ToString() + " (" + String.Format("{0:.###}", values[pair.Key - 1]) + z + String.Format("{0:.0}", zv) + dtype + Environment.NewLine);
+                    //txtResults.AppendText(String.Format("{0:.0}", zv) + Environment.NewLine);
+                }
+
+                c++;
             }
 
             if (!results) txtResults.AppendText("No Anomalies Found");

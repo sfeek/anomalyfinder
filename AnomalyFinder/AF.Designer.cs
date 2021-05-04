@@ -36,7 +36,6 @@
             this.lblSensitivity = new System.Windows.Forms.Label();
             this.lblInput = new System.Windows.Forms.Label();
             this.lblResults = new System.Windows.Forms.Label();
-            this.chkMovingZ = new System.Windows.Forms.CheckBox();
             this.txtWindowSize = new System.Windows.Forms.TextBox();
             this.lblZSize = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
@@ -44,33 +43,30 @@
             // 
             // txtInput
             // 
-            this.txtInput.Location = new System.Drawing.Point(16, 36);
-            this.txtInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtInput.Location = new System.Drawing.Point(12, 29);
             this.txtInput.MaxLength = 0;
             this.txtInput.Multiline = true;
             this.txtInput.Name = "txtInput";
             this.txtInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtInput.Size = new System.Drawing.Size(265, 491);
+            this.txtInput.Size = new System.Drawing.Size(200, 400);
             this.txtInput.TabIndex = 0;
             // 
             // txtResults
             // 
-            this.txtResults.Location = new System.Drawing.Point(563, 36);
-            this.txtResults.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtResults.Location = new System.Drawing.Point(422, 29);
             this.txtResults.MaxLength = 0;
             this.txtResults.Multiline = true;
             this.txtResults.Name = "txtResults";
             this.txtResults.ReadOnly = true;
             this.txtResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResults.Size = new System.Drawing.Size(265, 491);
+            this.txtResults.Size = new System.Drawing.Size(200, 400);
             this.txtResults.TabIndex = 1;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(324, 36);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Location = new System.Drawing.Point(243, 88);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(200, 49);
+            this.btnSearch.Size = new System.Drawing.Size(150, 40);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -78,78 +74,62 @@
             // 
             // txtSensitivity
             // 
-            this.txtSensitivity.Location = new System.Drawing.Point(404, 110);
-            this.txtSensitivity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSensitivity.Location = new System.Drawing.Point(303, 27);
             this.txtSensitivity.Name = "txtSensitivity";
-            this.txtSensitivity.Size = new System.Drawing.Size(119, 22);
+            this.txtSensitivity.Size = new System.Drawing.Size(90, 20);
             this.txtSensitivity.TabIndex = 3;
-            this.txtSensitivity.Text = "3.0";
+            this.txtSensitivity.Text = "10";
             // 
             // lblSensitivity
             // 
             this.lblSensitivity.AutoSize = true;
-            this.lblSensitivity.Location = new System.Drawing.Point(311, 113);
-            this.lblSensitivity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSensitivity.Location = new System.Drawing.Point(233, 30);
             this.lblSensitivity.Name = "lblSensitivity";
-            this.lblSensitivity.Size = new System.Drawing.Size(85, 17);
+            this.lblSensitivity.Size = new System.Drawing.Size(36, 13);
             this.lblSensitivity.TabIndex = 4;
-            this.lblSensitivity.Text = "Z Threshold";
+            this.lblSensitivity.Text = "Top #";
             // 
             // lblInput
             // 
             this.lblInput.AutoSize = true;
-            this.lblInput.Location = new System.Drawing.Point(119, 11);
-            this.lblInput.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInput.Location = new System.Drawing.Point(89, 9);
             this.lblInput.Name = "lblInput";
-            this.lblInput.Size = new System.Drawing.Size(39, 17);
+            this.lblInput.Size = new System.Drawing.Size(31, 13);
             this.lblInput.TabIndex = 5;
             this.lblInput.Text = "Input";
             // 
             // lblResults
             // 
             this.lblResults.AutoSize = true;
-            this.lblResults.Location = new System.Drawing.Point(673, 11);
-            this.lblResults.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblResults.Location = new System.Drawing.Point(505, 9);
             this.lblResults.Name = "lblResults";
-            this.lblResults.Size = new System.Drawing.Size(55, 17);
+            this.lblResults.Size = new System.Drawing.Size(42, 13);
             this.lblResults.TabIndex = 6;
             this.lblResults.Text = "Results";
             // 
-            // chkMovingZ
-            // 
-            this.chkMovingZ.AutoSize = true;
-            this.chkMovingZ.Location = new System.Drawing.Point(404, 217);
-            this.chkMovingZ.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.chkMovingZ.Name = "chkMovingZ";
-            this.chkMovingZ.Size = new System.Drawing.Size(88, 21);
-            this.chkMovingZ.TabIndex = 7;
-            this.chkMovingZ.Text = "Moving Z";
-            this.chkMovingZ.UseVisualStyleBackColor = true;
-            // 
             // txtWindowSize
             // 
-            this.txtWindowSize.Location = new System.Drawing.Point(404, 245);
-            this.txtWindowSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtWindowSize.Location = new System.Drawing.Point(303, 53);
             this.txtWindowSize.Name = "txtWindowSize";
-            this.txtWindowSize.Size = new System.Drawing.Size(119, 22);
+            this.txtWindowSize.Size = new System.Drawing.Size(90, 20);
             this.txtWindowSize.TabIndex = 8;
-            this.txtWindowSize.Text = "5";
+            this.txtWindowSize.Text = "10";
             // 
             // lblZSize
             // 
             this.lblZSize.AutoSize = true;
-            this.lblZSize.Location = new System.Drawing.Point(304, 249);
-            this.lblZSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblZSize.Location = new System.Drawing.Point(228, 56);
             this.lblZSize.Name = "lblZSize";
-            this.lblZSize.Size = new System.Drawing.Size(88, 17);
+            this.lblZSize.Size = new System.Drawing.Size(69, 13);
             this.lblZSize.TabIndex = 9;
             this.lblZSize.Text = "Window Size";
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(351, 354);
+            this.btnClear.Location = new System.Drawing.Point(262, 389);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(150, 49);
+            this.btnClear.Size = new System.Drawing.Size(112, 40);
             this.btnClear.TabIndex = 10;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -157,13 +137,12 @@
             // 
             // AF
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 554);
+            this.ClientSize = new System.Drawing.Size(637, 450);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.lblZSize);
             this.Controls.Add(this.txtWindowSize);
-            this.Controls.Add(this.chkMovingZ);
             this.Controls.Add(this.lblResults);
             this.Controls.Add(this.lblInput);
             this.Controls.Add(this.lblSensitivity);
@@ -171,10 +150,11 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtResults);
             this.Controls.Add(this.txtInput);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
             this.Name = "AF";
-            this.Text = "Anomaly Finder v1.52";
+            this.Text = "Anomaly Finder v2.00";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,7 +169,6 @@
         private System.Windows.Forms.Label lblSensitivity;
         private System.Windows.Forms.Label lblInput;
         private System.Windows.Forms.Label lblResults;
-        private System.Windows.Forms.CheckBox chkMovingZ;
         private System.Windows.Forms.TextBox txtWindowSize;
         private System.Windows.Forms.Label lblZSize;
         private System.Windows.Forms.Button btnClear;
