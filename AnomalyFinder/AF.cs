@@ -54,7 +54,7 @@ namespace AnomalieFinder
 
             double median1 = Median(buffer, size);
 
-            for (int i =0; i<size; i++)
+            for (int i = 0; i < size; i++)
             {
                 medians[i] = Math.Abs(buffer[i] - median1);
             }
@@ -91,7 +91,7 @@ namespace AnomalieFinder
                 // Keep only largest in the output
                 for (int i = s; i < s + w; i++)
                 {
-                    if (Math.Abs(oslice[i-s]) > Math.Abs(output[i]))  output[i] = oslice[i-s];
+                    if (Math.Abs(oslice[i - s]) > Math.Abs(output[i])) output[i] = oslice[i - s];
                 }
             }
 
@@ -144,12 +144,6 @@ namespace AnomalieFinder
                 return;
             }
 
-            if (pd < 1)
-            {
-                txtResults.AppendText("Top # Error");
-                return;
-            }
-
             txtResults.Text = String.Empty;
 
             double[] values = CSVSplit(txtInput.Text);
@@ -165,7 +159,7 @@ namespace AnomalieFinder
             }
             catch
             {
-                txtResults.AppendText("Moving Z Size Error!");
+                txtResults.AppendText("Windows Size Error!");
                 return;
             }
 
@@ -175,9 +169,15 @@ namespace AnomalieFinder
                 return;
             }
 
+            if (pd < 1 || pd > values.Length / 2)
+            {
+                txtResults.AppendText("Top # Error");
+                return;
+            }
+
             if (zsize < 3)
             {
-                txtResults.AppendText("Moving Z Size Error!");
+                txtResults.AppendText("Windows Size Error");
                 return;
             }
 

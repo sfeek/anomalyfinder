@@ -127,7 +127,7 @@
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(262, 389);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(112, 40);
             this.btnClear.TabIndex = 10;
@@ -154,7 +154,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "AF";
-            this.Text = "Anomaly Finder v2.00";
+            this.Text = "Anomaly Finder v2.05";
             this.ResumeLayout(false);
             this.PerformLayout();
 
